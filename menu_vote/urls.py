@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 api_v1_patterns = [
+    path("users/", include(arg=("menu_vote.users.urls", "users"), namespace="users")),
     path("restaurants/", include(arg=("menu_vote.restaurants.urls", "restaurants"), namespace="restaurants"))
 ]
 

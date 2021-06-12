@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+from datetime import timedelta
 
 import dj_database_url
 import os
-from datetime import timedelta
 from decouple import config, Csv
 from pathlib import Path
 
@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_yasg",
     "django_filters",
-    "menu_vote.restaurants"
+    "menu_vote.users",
+    "menu_vote.restaurants",
 ]
 
 MIDDLEWARE = [
@@ -158,3 +159,11 @@ REST_FRAMEWORK = {
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_ALL_ORIGINS = config("CORS_ALLOW_ALL_ORIGINS", default=False)
+
+
+# simplejwt settings
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=config("ACCESS_TOKEN_LIFETIME_MINUTES", cast=int, default=5)),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=config("REFRESH_TOKEN_LIFETIME_DAYS", cast=int, default=1)),
+    "ROTATE_REFRESH_TOKENS": True,
+}

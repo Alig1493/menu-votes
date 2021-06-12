@@ -6,7 +6,7 @@ from factory import Faker
 from factory.django import ImageField
 from rest_framework.test import APIClient
 
-from menu_vote.auth.tests.factories import UserFactory
+from menu_vote.users.tests.factories import UserFactory
 
 
 @pytest.fixture(autouse=True)

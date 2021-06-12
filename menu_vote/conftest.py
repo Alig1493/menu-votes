@@ -40,10 +40,16 @@ def user(password):
 
 
 @pytest.fixture
-def restaurant_superuser(user):
-    user.is_restaurant_superuser = True
+def superuser(user):
+    user.is_superuser = True
     user.save()
     return user
+
+
+@pytest.fixture
+def auth_superuser_client(superuser, client):
+    client.force_authenticate(superuser)
+    return client
 
 
 @pytest.fixture

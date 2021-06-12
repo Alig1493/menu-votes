@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_yasg",
     "django_filters",
-
+    "menu_vote.restaurants"
 ]
 
 MIDDLEWARE = [

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "django_filters",
     "menu_vote.users",
+    "menu_vote.menus",
     "menu_vote.restaurants",
 ]
 

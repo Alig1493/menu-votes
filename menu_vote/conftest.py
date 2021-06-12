@@ -74,5 +74,8 @@ def image_file():
 
 
 @pytest.fixture
-def base64_image_file(image_file):
+def base64_image(image_file):
     return base64.b64encode(image_file.read())
+
+
+

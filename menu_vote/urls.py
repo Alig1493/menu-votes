@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from menu_vote.schema import schema_view
 from menu_vote.votes.urls import vote_result_patterns
 
 api_v1_patterns = [
@@ -28,5 +29,6 @@ api_v1_patterns = [
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/", include(arg=(api_v1_patterns, "v1_patterns"), namespace="api_v1"))
+    path("api/v1/", include(arg=(api_v1_patterns, "v1_patterns"), namespace="api_v1")),
+    path("", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 ]

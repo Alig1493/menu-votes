@@ -39,3 +39,4 @@ necessary modules installed and running in your system.
 * Run the tests using: `make test`
 * Create a superuser to access admin panel using: `make createsuperuser` and follow the prompts.
 * Go to: `http://0.0.0.0:8000` on your browser of choice to view the docs.
+* Go to: `http://0.0.0.0:8000/admin` on your browser of choice to view the admin panel.

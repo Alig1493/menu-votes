@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django_filters",
     "menu_vote.users",
     "menu_vote.menus",
+    "menu_vote.votes",
     "menu_vote.restaurants",
 ]
 

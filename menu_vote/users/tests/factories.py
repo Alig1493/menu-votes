@@ -33,4 +33,3 @@ class UserFactory(DjangoModelFactory):
             )
             self.set_password(password)
             self.save()
-

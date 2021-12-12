@@ -9,15 +9,8 @@ on:
       - "*"
 
 jobs:
-  container-build:
-    runs-on: ubuntu-latest
-    # Docker Hub image that `container-build` executes in
-    container: python:3.9.4-slim-buster
-    steps:
-      - uses: actions/checkout@v2
-
   flake8:
-    needs: [container-build]
+    container: python:3.9.4-slim-buster
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,4 +20,37 @@ jobs:
         working-directory: menu_vote
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          flake8 . --exclude .git,.idea,.pytest_cache,docker,docs,*.egg-info,migrations,conf
+          python --version
+          flake8 . --exclude .git,.idea,.pytest_cache,docker,docs,*.egg-info,migrations,conf --verbose
+
+  pytest:
+    environment:
+      name: test
+    container: python:3.9.4-slim-buster
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PORT: 5432
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check dirs
+        run: ls -la
+      - name: Install pytest
+        run: pip install -r requirements.txt
+      - name: Run pytest
+        run: |
+          python --version
+          pytest -s --cov
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}

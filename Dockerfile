@@ -4,7 +4,7 @@ WORKDIR /app
 ENV PYTHONUNBUFFERED=1
 
 COPY ./requirements.txt requirements.txt
-RUN apt-get update && apt-get install iputils-ping -y
+RUN apt-get update && apt-get install gcc musl-dev libpq-dev iputils-ping -y
 RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . .

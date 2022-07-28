@@ -1,0 +1,10 @@
+resources:
+  - deployments/django_deployment.yaml
+  - deployments/postgres_deployment.yaml
+secretGenerator:
+- name: django
+  envs:
+  - .env/local/django
+- name: postgres
+  envs:
+  - .env/local/postgres
